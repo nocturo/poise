@@ -74,6 +74,8 @@ module Poise
         if respond_to?(:node) && node.platform_family?('windows')
           command_args = [Poise::Utils::Win32.reparse_command(*command_args)]
         end
+
+	options[:environment]['PATH'] ||= ENV['PATH']
         # Call Chef's shell_out wrapper.
         shell_out(*command_args, **options)
       end
